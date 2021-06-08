@@ -9,7 +9,6 @@
 
 # testing
 /coverage
-/old_code
 
 # production
 /build
@@ -25,4 +24,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
+#user_credentials
+/Config/config.js
