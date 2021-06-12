@@ -8,7 +8,7 @@ function App() {
     <div>
      {/*  <AddUser/> */}
      <Dashboard></Dashboard>
-     <BitcoinValue></BitcoinValue>
+     {/* <BitcoinValue></BitcoinValue> */}
     </div>
   );
 }

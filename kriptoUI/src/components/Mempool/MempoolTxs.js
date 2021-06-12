@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,22 +10,19 @@ import Divider from "@material-ui/core/Divider";
 import Title from "../mUI/Title";
 
 // Fetch data from blockchain
+let mempoolTxsArray = [];
+
+// fetch array of transactions currently in mempool
 const showMempoolTxsHandler = (event) => {
   event.preventDefault();
   console.log("pressing button works!");
   fetch("/currentPrice")
     .then((response) => response.json())
-    .then((data) => console.log(data));
-
-  // data; // transakcije unutar niza
+    .then((data) => {
+      console.log(data);
+      mempoolTxsArray = data;
+    });
 };
-
-
-
-
-
-
-
 
 // mock data for table
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -84,19 +81,42 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   TxsTableBodyRow: {
-    cursor: "pointer"
+    cursor: "pointer",
   },
 }));
 
 export default function Orders() {
+  const [mempoolTxsArray, setMempoolTxsArray] = useState(["empty"]);
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log("status updated!");
+    fetch("/currentPrice")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setMempoolTxsArray(data);
+      });
+  }, []); // empty array to stop infinitive loop -> it is a dependency
 
   const classes = useStyles();
+
+  const onSingleTxClickHandler = (transactionId) => {
+    console.log("You clicked a transaction with id: ", transactionId);
+
+    /* TODO: implement a modal popup with details about the clicked transaction */
+  };
+
+
+
+
+
   return (
     <React.Fragment>
       <Title>Mempool transactions</Title>
       <Divider />
-      <Table size="medium">
+      {/* TODO: change font of transactions inside table */}
+      <Table size="small">
         {/* <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -106,26 +126,39 @@ export default function Orders() {
             <TableCell align="right">Sale Amount</TableCell>
           </TableRow>
         </TableHead> */}
+
+        {/* TODO: getmempoolentry  -> poziv za pojedinačnu transakciju (njen info) */}
+        {/* TODO: Napraviti da se otvori modal kad se klikne na određenu transakciju */}
+
+        {/* let content = categories.map((catName, i) => {
+      return (
+        <li
+          key ={i}
+          onClick = {() => {this.props.onClick(catName)}}
+        >
+        <p>{catName}</p>
+        </li>
+      )
+    }); */}
         <TableBody>
-          {rows.map((row) => (
+          {mempoolTxsArray.map((transaction, i) => (
             <TableRow
               className={classes.TxsTableBodyRow}
-              key={row.id}
-              onClick={() => console.log("row clicking works!")}
+              key={i}
+              onClick={() => onSingleTxClickHandler(transaction)}
               cursor="pointer"
               hover
             >
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
+              <TableCell align="center">{transaction}</TableCell>
+              {/* <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell> */}
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-
         {/* placeholder link */}
         <Link color="primary" href="#" onClick={preventDefault}>
           See more orders

@@ -131,11 +131,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [mainContainer, setMainContainer] = React.useState("default body text");
+  const [containerBody, setContainerBody] = React.useState("default body text");
 
   const onMempoolClickHandler = () => {
-    setMainContainer(
-      <Grid container spacing={3}>
+    setContainerBody(
+      <Grid container spacing={3} justify='center'>
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
@@ -149,7 +149,7 @@ export default function Dashboard() {
           </Paper>
         </Grid>
         {/* Mempool transactions */}
-        <Grid item xs={12}>
+        <Grid item xs={12} md={10} lg={8}>
           <Paper className={classes.paper}>
             <MempoolTxs />
           </Paper>
@@ -286,7 +286,7 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          {mainContainer}
+          {containerBody}
 
           {/* footer / copyright */}
           <Box pt={4}>
