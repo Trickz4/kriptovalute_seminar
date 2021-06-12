@@ -22,12 +22,18 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/currentPrice", (req, res) => {
+app.get("/getRawMempool", (req, res) => {
   client.getRawMempool().then((response) => {
     res.send(response);
   });
 });
 
+app.get("/currentValue", (req, res) => {
+  // TODO: implement call for current value of bitcoin
+  // client.getRawMempool().then((response) => {
+  //   res.send(response);
+  // });
+});
 
 // listen
 app.listen(port, () => {

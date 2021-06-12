@@ -91,7 +91,7 @@ export default function Orders() {
   useEffect(() => {
     // Update the document title using the browser API
     console.log("status updated!");
-    fetch("/currentPrice")
+    fetch("/getRawMempool")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
