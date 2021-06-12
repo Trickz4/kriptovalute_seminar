@@ -12,7 +12,7 @@ import Title from "../mUI/Title";
 // Fetch data from blockchain
 let mempoolTxsArray = [];
 
-// fetch array of transactions currently in mempool
+/* // use as an example
 const showMempoolTxsHandler = (event) => {
   event.preventDefault();
   console.log("pressing button works!");
@@ -22,7 +22,7 @@ const showMempoolTxsHandler = (event) => {
       console.log(data);
       mempoolTxsArray = data;
     });
-};
+}; */
 
 // mock data for table
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -89,7 +89,8 @@ export default function Orders() {
   const [mempoolTxsArray, setMempoolTxsArray] = useState(["empty"]);
 
   useEffect(() => {
-    // Update the document title using the browser API
+    // Update component upon mounting
+    // fetch array of transactions currently in mempool
     console.log("status updated!");
     fetch("/getRawMempool")
       .then((response) => response.json())
@@ -102,14 +103,11 @@ export default function Orders() {
   const classes = useStyles();
 
   const onSingleTxClickHandler = (transactionId) => {
+    // e.preventDefault()? -> probably not needed
     console.log("You clicked a transaction with id: ", transactionId);
 
     /* TODO: implement a modal popup with details about the clicked transaction */
   };
-
-
-
-
 
   return (
     <React.Fragment>
@@ -159,7 +157,7 @@ export default function Orders() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        {/* placeholder link */}
+        {/* placeholder link -> maybe implement refresh button? (dummy setState koji update-a dummy varijablu)*/}
         <Link color="primary" href="#" onClick={preventDefault}>
           See more orders
         </Link>
