@@ -29,9 +29,11 @@ import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import PoolIcon from "@material-ui/icons/Pool";
+import "@fontsource/roboto";
 
 // import Chart from "./Chart";
-// import Deposits from "./Deposits";
+
 import MempoolTxs from "../Mempool/MempoolTxs";
 
 function Copyright() {
@@ -49,6 +51,7 @@ function Copyright() {
 
 const drawerWidth = 240;
 
+// Styling
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -130,32 +133,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(true);
   const [containerBody, setContainerBody] = React.useState("default body text");
 
+  const onHomeClickHandler = () => {
+    setContainerBody(<MempoolTxs></MempoolTxs>);
+  };
+
   const onMempoolClickHandler = () => {
-    setContainerBody(
-      <Grid container spacing={3} justify='center'>
-        {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
-            {/*  {<Chart />}   */} {/* Chart placeholder */}
-          </Paper>
-        </Grid>
-        {/* Recent something */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-            {/*  {<Something />}   */} {/* component placeholder */}
-          </Paper>
-        </Grid>
-        {/* Mempool transactions */}
-        <Grid item xs={12} md={10} lg={8}>
-          <Paper className={classes.paper}>
-            <MempoolTxs />
-          </Paper>
-        </Grid>
-      </Grid>
-    );
+    setContainerBody(<MempoolTxs></MempoolTxs>);
   };
 
   const handleDrawerOpen = () => {
@@ -196,7 +183,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            {/* Appbar title text placeholder */}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -222,32 +209,35 @@ export default function Dashboard() {
         <Divider />
         <List>
           <div>
-            <ListItem button>
+            <ListItem button onClick={onHomeClickHandler}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="Dashboard" /> {/* MAIN PAGE */}
+              <ListItemText primary="Home" /> {/* MAIN PAGE */}
             </ListItem>
+
             <ListItem button onClick={onMempoolClickHandler}>
-              {" "}
               {/* update the main container */}
               <ListItemIcon>
-                <ShoppingCartIcon /> {/* icon */}
+                <PoolIcon /> {/* icon */}
               </ListItemIcon>
               <ListItemText primary="Mempool" /> {/* Mempool transactions */}
             </ListItem>
+
             <ListItem button>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="placeholder 1" />
             </ListItem>
+
             <ListItem button>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
               <ListItemText primary="placeholder 2" />
             </ListItem>
+
             <ListItem button>
               <ListItemIcon>
                 <LayersIcon />

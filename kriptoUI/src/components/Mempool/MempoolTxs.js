@@ -7,7 +7,15 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import clsx from "clsx";
+
+
+
+
 import Title from "../mUI/Title";
+import MempoolSingleTxInfo from "./MempoolSingleTxInfo";
 
 // Fetch data from blockchain
 let mempoolTxsArray = [];
@@ -83,10 +91,24 @@ const useStyles = makeStyles((theme) => ({
   TxsTableBodyRow: {
     cursor: "pointer",
   },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 240,
+  },
+  fixedMediumHeight: {
+    height: 400,
+  },
 }));
 
-export default function Orders() {
+export default function Orders(props) {
   const [mempoolTxsArray, setMempoolTxsArray] = useState(["empty"]);
+  const [mempoolSingleTxId, setMempoolSingleTxId] =
+    useState("Empty transaction");
 
   useEffect(() => {
     // Update component upon mounting
@@ -104,18 +126,51 @@ export default function Orders() {
 
   const onSingleTxClickHandler = (transactionId) => {
     // e.preventDefault()? -> probably not needed
-    console.log("You clicked a transaction with id: ", transactionId);
-
-    /* TODO: implement a modal popup with details about the clicked transaction */
+    setMempoolSingleTxId(transactionId);
   };
 
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const fixedMediumHeightPaper = clsx(classes.paper, classes.fixedMediumHeight);
+
+  const placeholder = (
+    <div>
+      {/* Chart */}
+      <Grid item xs={12} md={8} lg={9}>
+        <Paper className={fixedHeightPaper}>
+          {/*  {<Chart />}   */} {/* Chart placeholder */}
+        </Paper>
+      </Grid>
+    </div>
+  );
+
+  // ------------------
+  // const [mempoolSingleTxId, setMempoolSingleTxId] =
+  //   React.useState("tx not defined");
+
+  //   const onFetchMempoolSingleTxHandler = (transactionId) => {
+  //     setMempoolSingleTxId(transactionId);
+  //     console.log("inside dashboard.js: ", transactionId);
+  //     console.log(mempoolSingleTxId);
+  //   };
+
+  // -----------------
+
   return (
-    <React.Fragment>
-      <Title>Mempool transactions</Title>
-      <Divider />
-      {/* TODO: change font of transactions inside table */}
-      <Table size="small">
-        {/* <TableHead>
+    <Grid container spacing={3} justify="center">
+      {/* Recent something */}
+      <Grid item xs={12} md={10} lg={8}>
+        <Paper className={fixedMediumHeightPaper}>
+          <MempoolSingleTxInfo mempoolSingleTransactionId={mempoolSingleTxId} />
+        </Paper>
+      </Grid>
+      {/* Mempool transactions */}
+      <Grid item xs={12} md={10} lg={8}>
+        <Paper className={fixedMediumHeightPaper}>
+          <Title>Mempool transactions</Title>
+          <Divider />
+          {/* TODO: change font of transactions inside table */}
+          <Table size="small" stickyHeader>
+            {/* <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
@@ -125,43 +180,32 @@ export default function Orders() {
           </TableRow>
         </TableHead> */}
 
-        {/* TODO: getmempoolentry  -> poziv za pojedinačnu transakciju (njen info) */}
-        {/* TODO: Napraviti da se otvori modal kad se klikne na određenu transakciju */}
-
-        {/* let content = categories.map((catName, i) => {
-      return (
-        <li
-          key ={i}
-          onClick = {() => {this.props.onClick(catName)}}
-        >
-        <p>{catName}</p>
-        </li>
-      )
-    }); */}
-        <TableBody>
-          {mempoolTxsArray.map((transaction, i) => (
-            <TableRow
-              className={classes.TxsTableBodyRow}
-              key={i}
-              onClick={() => onSingleTxClickHandler(transaction)}
-              cursor="pointer"
-              hover
-            >
-              <TableCell align="center">{transaction}</TableCell>
-              {/* <TableCell>{row.name}</TableCell>
+            <TableBody>
+              {mempoolTxsArray.map((transaction, i) => (
+                <TableRow
+                  className={classes.TxsTableBodyRow}
+                  key={i}
+                  onClick={() => onSingleTxClickHandler(transaction)}
+                  cursor="pointer"
+                  hover
+                >
+                  <TableCell align="center">{transaction}</TableCell>
+                  {/* <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
               <TableCell align="right">{row.amount}</TableCell> */}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        {/* placeholder link -> maybe implement refresh button? (dummy setState koji update-a dummy varijablu)*/}
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
-    </React.Fragment>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <div className={classes.seeMore}>
+            {/* placeholder link -> maybe implement refresh button? (dummy setState koji update-a dummy varijablu)*/}
+            <Link color="primary" href="#" onClick={preventDefault}>
+              See more orders
+            </Link>
+          </div>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
