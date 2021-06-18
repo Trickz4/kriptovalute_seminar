@@ -32,7 +32,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import PoolIcon from "@material-ui/icons/Pool";
 import "@fontsource/roboto";
 
-// import Chart from "./Chart";
+import Chart from "../mUI/Chart";
 
 import MempoolTxs from "../Mempool/MempoolTxs";
 import BitcoinValue from "../CurrentValue/BitcoinValue";
@@ -132,13 +132,18 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  fixedHeightMarketPriceChart: {
+    height: 600
+  },
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(true);
-  const [containerBody, setContainerBody] = React.useState(<BitcoinValue></BitcoinValue>);
+  const [containerBody, setContainerBody] = React.useState(
+    <BitcoinValue></BitcoinValue>
+  );
 
   const onHomeClickHandler = () => {
     setContainerBody(<BitcoinValue></BitcoinValue>);
@@ -154,7 +159,20 @@ export default function Dashboard() {
 
   const onNetworkInfoClickHandler = () => {
     setContainerBody(<NetworkInfo></NetworkInfo>);
-  }; 
+  };
+
+  const testChartHandler = () => {
+    setContainerBody(
+      <Grid container spacing={3} justify="center">
+        {/* Chart */}
+        <Grid item xs={12} md={12} lg={12}>
+          <Paper className={fixedHeightMarkerPriceChart}>
+            <Chart />
+          </Paper>
+        </Grid>
+      </Grid>
+    );
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -163,7 +181,7 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+  const fixedHeightMarkerPriceChart = clsx(classes.paper, classes.fixedHeightMarketPriceChart);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -233,7 +251,7 @@ export default function Dashboard() {
               </ListItemIcon>
               <ListItemText primary="Blockchain info" />
             </ListItem>
-            
+
             <ListItem button onClick={onMempoolClickHandler}>
               {/* update the main container */}
               <ListItemIcon>
@@ -241,7 +259,6 @@ export default function Dashboard() {
               </ListItemIcon>
               <ListItemText primary="Mempool" /> {/* Mempool transactions */}
             </ListItem>
-
 
             <ListItem button onClick={onNetworkInfoClickHandler}>
               <ListItemIcon>
@@ -262,11 +279,11 @@ export default function Dashboard() {
         <List>
           <div>
             <ListSubheader inset>Additional sections</ListSubheader>
-            <ListItem button>
+            <ListItem button onClick={testChartHandler}>
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>
-              <ListItemText primary="month" />
+              <ListItemText primary="Test chart" />
             </ListItem>
             <ListItem button>
               <ListItemIcon>

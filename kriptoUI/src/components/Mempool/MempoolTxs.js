@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders(props) {
+export default function MempoolTxs(props) {
   const [mempoolTxsArray, setMempoolTxsArray] = useState(["empty"]);
   const [mempoolSingleTxId, setMempoolSingleTxId] =
     useState("Empty transaction");
@@ -159,7 +159,7 @@ export default function Orders(props) {
     <Grid container spacing={3} justify="center">
       {/* Recent something */}
       <Grid item xs={12} md={10} lg={8}>
-        <Paper className={fixedMediumHeightPaper}>
+        <Paper className={classes.paper}>
           <MempoolSingleTxInfo mempoolSingleTransactionId={mempoolSingleTxId} />
         </Paper>
       </Grid>

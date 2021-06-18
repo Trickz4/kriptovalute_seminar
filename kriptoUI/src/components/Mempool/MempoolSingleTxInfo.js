@@ -46,11 +46,12 @@ export default function MempoolSingleTxInfo(props) {
       fetch(`/getRawTransaction/?id=${props.mempoolSingleTransactionId}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data)
           setTxInfoJSX(
             <React.Fragment>
               <ListItem>
                 <ListItemText
-                  primary={`Tx size:`}
+                  primary={`Size:`}
                   primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
                   secondary={data.size}
                   secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
