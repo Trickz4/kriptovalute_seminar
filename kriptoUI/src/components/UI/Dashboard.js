@@ -35,6 +35,9 @@ import "@fontsource/roboto";
 // import Chart from "./Chart";
 
 import MempoolTxs from "../Mempool/MempoolTxs";
+import BitcoinValue from "../CurrentValue/BitcoinValue";
+import BlockchainInfo from "../Blockchain/BlockchainInfo";
+import NetworkInfo from "../Blockchain/NetworkInfo";
 
 function Copyright() {
   return (
@@ -135,15 +138,23 @@ export default function Dashboard() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(true);
-  const [containerBody, setContainerBody] = React.useState("default body text");
+  const [containerBody, setContainerBody] = React.useState(<BitcoinValue></BitcoinValue>);
 
   const onHomeClickHandler = () => {
-    setContainerBody(<MempoolTxs></MempoolTxs>);
+    setContainerBody(<BitcoinValue></BitcoinValue>);
+  };
+
+  const onBlockchainInfoClickHandler = () => {
+    setContainerBody(<BlockchainInfo></BlockchainInfo>);
   };
 
   const onMempoolClickHandler = () => {
     setContainerBody(<MempoolTxs></MempoolTxs>);
   };
+
+  const onNetworkInfoClickHandler = () => {
+    setContainerBody(<NetworkInfo></NetworkInfo>);
+  }; 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -183,7 +194,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            {/* Appbar title text placeholder */}
+            Bitcoin statistics
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -216,6 +227,13 @@ export default function Dashboard() {
               <ListItemText primary="Home" /> {/* MAIN PAGE */}
             </ListItem>
 
+            <ListItem button onClick={onBlockchainInfoClickHandler}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Blockchain info" />
+            </ListItem>
+            
             <ListItem button onClick={onMempoolClickHandler}>
               {/* update the main container */}
               <ListItemIcon>
@@ -224,18 +242,12 @@ export default function Dashboard() {
               <ListItemText primary="Mempool" /> {/* Mempool transactions */}
             </ListItem>
 
-            <ListItem button>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="placeholder 1" />
-            </ListItem>
 
-            <ListItem button>
+            <ListItem button onClick={onNetworkInfoClickHandler}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
-              <ListItemText primary="placeholder 2" />
+              <ListItemText primary="Network Info" />
             </ListItem>
 
             <ListItem button>
