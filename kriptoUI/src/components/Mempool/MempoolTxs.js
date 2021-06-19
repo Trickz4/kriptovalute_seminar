@@ -113,7 +113,6 @@ export default function MempoolTxs(props) {
   useEffect(() => {
     // Update component upon mounting
     // fetch array of transactions currently in mempool
-    console.log("status updated!");
     fetch("/getRawMempool")
       .then((response) => response.json())
       .then((data) => {
@@ -198,12 +197,6 @@ export default function MempoolTxs(props) {
               ))}
             </TableBody>
           </Table>
-          <div className={classes.seeMore}>
-            {/* placeholder link -> maybe implement refresh button? (dummy setState koji update-a dummy varijablu)*/}
-            <Link color="primary" href="#" onClick={preventDefault}>
-              See more orders
-            </Link>
-          </div>
         </Paper>
       </Grid>
     </Grid>

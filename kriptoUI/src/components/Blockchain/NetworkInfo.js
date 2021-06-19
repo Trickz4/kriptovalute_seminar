@@ -98,7 +98,7 @@ export default function NetworkInfo(props) {
   return (
     <Grid container spacing={3} justify="center">
       {/* 1st card */}
-      <Grid item xs={12} md={10} lg={8}>
+      <Grid item xs={12} md={10} lg={10}>
         <Paper className={classes.paper}>
           <Typography
             component="h2"
@@ -107,7 +107,7 @@ export default function NetworkInfo(props) {
             align="center"
             classes={{ h2: classes.gridTitle }}
           >
-            Blockchain info
+            Network information
           </Typography>
           <Divider></Divider>
 
@@ -192,13 +192,13 @@ export default function NetworkInfo(props) {
       </Grid>
 
       {/* 2nd card */}
-      <Grid item xs={12} md={10} lg={8}>
+   {/*    <Grid item xs={12} md={10} lg={8}>
         <Paper className={fixedMediumHeightPaper}>
           <Title>Latest block</Title>
           <Divider />
           Chart placeholder?
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

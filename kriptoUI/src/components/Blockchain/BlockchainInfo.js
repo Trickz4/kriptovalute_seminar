@@ -68,7 +68,6 @@ const ListItemTextSecondaryCSS = {
 };
 
 export default function BlockchainInfo(props) {
-  const [currentValue, setCurrentValue] = useState("0");
   const [blockchainInfo, setBlockchainInfo] = useState("");
   const classes = useStyles();
 
@@ -78,15 +77,6 @@ export default function BlockchainInfo(props) {
 
   useEffect(() => {
     // Update component upon mounting
-    // fetch array of transactions currently in mempool
-    console.log("status updated!");
-    fetch("/currentValue")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setCurrentValue(data.USD.last);
-      });
-
     fetch("/getBlockchainInfo")
       .then((response) => response.json())
       .then((data) => {
@@ -98,7 +88,7 @@ export default function BlockchainInfo(props) {
   return (
     <Grid container spacing={3} justify="center">
       {/* 1st card */}
-      <Grid item xs={12} md={10} lg={8}>
+      <Grid item xs={12} md={10} lg={10}>
         <Paper className={classes.paper}>
           <Typography
             component="h2"
@@ -110,23 +100,6 @@ export default function BlockchainInfo(props) {
             Blockchain info
           </Typography>
           <Divider></Divider>
-
-          {/* <ListItem>
-            <ListItemText
-              align="center"
-              primary={`Market price:`}
-              primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
-              secondary={
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  align="center"
-                  classes={{ root: classes.marketPrice }}
-                >{`${currentValue.toLocaleString()} $`}</Typography>
-              }
-              secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
-            />
-          </ListItem> */}
 
           <ListItem>
             <ListItemText
@@ -182,13 +155,13 @@ export default function BlockchainInfo(props) {
       </Grid>
 
       {/* 2nd card */}
-      <Grid item xs={12} md={10} lg={8}>
+    {/*   <Grid item xs={12} md={10} lg={8}>
         <Paper className={fixedMediumHeightPaper}>
           <Title>Latest block</Title>
           <Divider />
           Chart placeholder?
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

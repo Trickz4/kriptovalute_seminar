@@ -78,19 +78,16 @@ export default function BitcoinValue(props) {
 
   useEffect(() => {
     // Update component upon mounting
-    // fetch array of transactions currently in mempool
     console.log("status updated!");
     fetch("/currentValue")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCurrentValue(data.USD.last);
       });
 
     fetch("/blockchainStats")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setBlockchainStats(data);
       });
   }, []); // empty array to stop infinitive loop -> it is a dependency
@@ -99,7 +96,7 @@ export default function BitcoinValue(props) {
     <Grid container spacing={3} justify="center">
 
       {/* 1st card */}
-      <Grid item xs={12} md={10} lg={8}>
+      <Grid item xs={12} md={10} lg={10}>
         <Paper className={classes.paper}>
           <Typography
             component="h2"
@@ -169,13 +166,13 @@ export default function BitcoinValue(props) {
       </Grid>
 
       {/* 2nd card */}
-      <Grid item xs={12} md={10} lg={8}>
+   {/*    <Grid item xs={12} md={10} lg={8}>
         <Paper className={fixedMediumHeightPaper}>
           <Title>Mempool transactions</Title>
           <Divider />
           Chart placeholder?
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }
