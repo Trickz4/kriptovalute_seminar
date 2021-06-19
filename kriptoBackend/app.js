@@ -1,13 +1,12 @@
 const config = require("./Config/config");
 const http = require("http");
 const request = require("request");
+const Client = require("./node_modules/bitcoin-core"); 
 
 const express = require("express");
 const app = express();
 const port = 5000;
 
-// setup client to OSS blockchain for rpc
-const Client = require("./node_modules/bitcoin-core");
 const client = new Client({
   host: config.OSS.host,
   network: "mainnet",
@@ -36,11 +35,6 @@ app.get("/getRawTransaction", (req, res) => {
 });
 
 app.get("/currentValue", (req, res) => {
-  // request.get("https://blockchain.info/ticker", (err, response, body) => {
-  //   let JSONresponse = JSON.parse(body);
-  //   res.send(JSON.parse(response.body));
-  // });
-
   request(
     {
       method: "GET",
@@ -51,7 +45,7 @@ app.get("/currentValue", (req, res) => {
       if (!error && response.statusCode == 200) {
         res.send(JSON.parse(response.body));
       } else {
-        res.send("GET failed");
+        res.send("GET bitcoin current value failed");
       }
     }
   );
@@ -100,6 +94,23 @@ app.get("/marketPriceChartData", (req, res) => {
     {
       method: "GET",
       uri: "https://api.blockchain.info/charts/market-price?timespan=1year&rollingAverage=24hours&format=json",
+      // headers: { Authorization: "Bearer " + "TOKEN HERE" },
+    },
+    (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+        res.send(JSON.parse(response.body));
+      } else {
+        res.send("GET chart data failed");
+      }
+    }
+  );
+});
+
+app.get("/transactionsChartData", (req, res) => {
+  request(
+    {
+      method: "GET",
+      uri: "https://api.blockchain.info/charts/n-transactions?timespan=1year&format=json",
       // headers: { Authorization: "Bearer " + "TOKEN HERE" },
     },
     (error, response, body) => {

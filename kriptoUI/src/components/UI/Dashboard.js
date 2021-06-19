@@ -32,18 +32,18 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import PoolIcon from "@material-ui/icons/Pool";
 import "@fontsource/roboto";
 
-import Chart from "../mUI/Chart";
-
 import MempoolTxs from "../Mempool/MempoolTxs";
 import BitcoinValue from "../CurrentValue/BitcoinValue";
 import BlockchainInfo from "../Blockchain/BlockchainInfo";
 import NetworkInfo from "../Blockchain/NetworkInfo";
+import MarketPriceChart from "../mUI/MarketPriceChart";
+import TransactionsChart from "../mUI/TransactionsChart";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="http://localhost:3000/">
         Kriptovalute
       </Link>{" "}
       {new Date().getFullYear()}
@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
   fixedHeightMarketPriceChart: {
-    height: 600
+    height: 600,
   },
 }));
 
@@ -161,13 +161,26 @@ export default function Dashboard() {
     setContainerBody(<NetworkInfo></NetworkInfo>);
   };
 
-  const testChartHandler = () => {
+  const onMarketPriceChartClickHandler = () => {
     setContainerBody(
       <Grid container spacing={3} justify="center">
         {/* Chart */}
         <Grid item xs={12} md={12} lg={12}>
           <Paper className={fixedHeightMarkerPriceChart}>
-            <Chart />
+            <MarketPriceChart />
+          </Paper>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const onTransactionsChartClickHandler = () => {
+    setContainerBody(
+      <Grid container spacing={3} justify="center">
+        {/* Chart */}
+        <Grid item xs={12} md={12} lg={12}>
+          <Paper className={fixedHeightMarkerPriceChart}>
+            <TransactionsChart />
           </Paper>
         </Grid>
       </Grid>
@@ -181,7 +194,10 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const fixedHeightMarkerPriceChart = clsx(classes.paper, classes.fixedHeightMarketPriceChart);
+  const fixedHeightMarkerPriceChart = clsx(
+    classes.paper,
+    classes.fixedHeightMarketPriceChart
+  );
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -214,11 +230,11 @@ export default function Dashboard() {
           >
             Bitcoin statistics
           </Typography>
-          <IconButton color="inherit">
+       {/*    <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
 
@@ -267,36 +283,42 @@ export default function Dashboard() {
               <ListItemText primary="Network Info" />
             </ListItem>
 
-            <ListItem button>
+           {/*  <ListItem button>
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
               <ListItemText primary="placeholder 3" />
-            </ListItem>
+            </ListItem> */}
           </div>
         </List>
         <Divider />
         <List>
           <div>
-            <ListSubheader inset>Additional sections</ListSubheader>
-            <ListItem button onClick={testChartHandler}>
+            <ListSubheader inset>Historical Data (Charts)</ListSubheader>
+
+            {/* Market price chart */}
+            <ListItem button onClick={onMarketPriceChartClickHandler}>
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>
-              <ListItemText primary="Test chart" />
+              <ListItemText primary="Market price per day" />
             </ListItem>
-            <ListItem button>
+
+            {/* Transactions per day chart */}
+            <ListItem button onClick={onTransactionsChartClickHandler}>
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>
-              <ListItemText primary="quarter" />
+              <ListItemText primary="Transcations per day" />
             </ListItem>
-            <ListItem button>
+
+            {/* Placeholder */}
+      {/*       <ListItem button>
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>
               <ListItemText primary="Year" />
-            </ListItem>
+            </ListItem> */}
           </div>
         </List>
       </Drawer>

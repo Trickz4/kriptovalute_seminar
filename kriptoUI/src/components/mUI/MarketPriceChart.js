@@ -30,13 +30,12 @@ const data1 = [
   createData("24:00", undefined),
 ];
 
-export default function Chart() {
+export default function MarketPriceChart() {
   const theme = useTheme();
-  const [chartData, setChartData] = useState();
+  const [chartData, setChartData] = useState("");
   let parsedData;
   useEffect(() => {
     // Update component upon mounting
-    // fetch array of transactions currently in mempool
     console.log("status updated!");
 
     fetch("/marketPriceChartData")
@@ -63,49 +62,53 @@ export default function Chart() {
   return (
     <React.Fragment>
       <Title>Market price per day (Last 365 days)</Title>
-      <ResponsiveContainer>
-        <LineChart
-          // width={600}
-          // height={500}
-          data={chartData}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 20,
-          }}
-        >
-          <XAxis
-            dataKey="x"
-            stroke={theme.palette.text.secondary}
-            minTickGap={30}
-          />
-          <YAxis
-            stroke={theme.palette.text.secondary}
-            tickFormatter={formatYaxis}
-            dy={0}
+      {chartData && (
+        <ResponsiveContainer>
+          <LineChart
+            // width={600}
+            // height={500}
+            data={chartData}
+            margin={{
+              top: 16,
+              right: 16,
+              bottom: 0,
+              left: 20,
+            }}
           >
-            <Label
-              offset={15}
-              angle={270}
-              position="left"
-              style={{
-                textAnchor: "middle",
-                fill: theme.palette.text.primary,
-              }}
+            <XAxis
+              dataKey="x"
+              stroke={theme.palette.text.secondary}
+              minTickGap={30}
+            />
+            <YAxis
+              stroke={theme.palette.text.secondary}
+              tickFormatter={formatYaxis}
+              dy={0}
             >
-              Market Price ($)
-            </Label>
-          </YAxis>
-          <Line
-            type="monotone"
-            dataKey="y"
-            stroke={theme.palette.primary.main}
-            dot={false}
-          />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
+              <Label
+                offset={15}
+                angle={270}
+                position="left"
+                style={{
+                  textAnchor: "middle",
+                  fill: theme.palette.text.primary,
+                }}
+              >
+                Market Price ($)
+              </Label>
+            </YAxis>
+            <Line
+              animationEasing="ease"
+              animationDuration={3000}
+              type="monotone"
+              dataKey="y"
+              stroke={theme.palette.primary.main}
+              dot={false}
+            />
+            <Tooltip />
+          </LineChart>
+        </ResponsiveContainer>
+      )}
     </React.Fragment>
   );
 }
