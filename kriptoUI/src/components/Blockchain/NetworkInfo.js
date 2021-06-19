@@ -68,29 +68,20 @@ const ListItemTextSecondaryCSS = {
 };
 
 export default function NetworkInfo(props) {
-  const [currentValue, setCurrentValue] = useState("0");
   const [networkInfo, setNetworkInfo] = useState("");
   const classes = useStyles();
 
-  let placeholderArray = [];
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const fixedMediumHeightPaper = clsx(classes.paper, classes.fixedMediumHeight);
 
   useEffect(() => {
     // Update component upon mounting
-    // fetch array of transactions currently in mempool
     console.log("status updated!");
-    fetch("/currentValue")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setCurrentValue(data.USD.last);
-      });
 
     fetch("/getNetworkInfo")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setNetworkInfo(data);
       });
   }, []); // empty array to stop infinitive loop -> it is a dependency
@@ -111,23 +102,6 @@ export default function NetworkInfo(props) {
           </Typography>
           <Divider></Divider>
 
-          {/* <ListItem>
-            <ListItemText
-              align="center"
-              primary={`Market price:`}
-              primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
-              secondary={
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  align="center"
-                  classes={{ root: classes.marketPrice }}
-                >{`${currentValue.toLocaleString()} $`}</Typography>
-              }
-              secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
-            />
-          </ListItem> */}
-
           <ListItem>
             <ListItemText
               align="center"
@@ -140,7 +114,6 @@ export default function NetworkInfo(props) {
 
           <ListItem>
             <ListItemText
-            //   align="center"
               primary={`Protocol version:`}
               primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
               secondary={networkInfo.protocolversion}
@@ -150,17 +123,17 @@ export default function NetworkInfo(props) {
 
           <ListItem>
             <ListItemText
-            //   align="center"
+              //   align="center"
               primary={`Active:`}
               primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
-              secondary={networkInfo.networkactive ? 'True' : 'False'}
+              secondary={networkInfo.networkactive ? "True" : "False"}
               secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
             />
           </ListItem>
 
           <ListItem>
             <ListItemText
-            //   align="center"
+              //   align="center"
               primary={`Connections in:`}
               primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
               secondary={networkInfo.connections_in}
@@ -170,7 +143,7 @@ export default function NetworkInfo(props) {
 
           <ListItem>
             <ListItemText
-            //   align="center"
+              //   align="center"
               primary={`Connections out:`}
               primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
               secondary={networkInfo.connections_out}
@@ -180,19 +153,18 @@ export default function NetworkInfo(props) {
 
           <ListItem>
             <ListItemText
-            //   align="center"
+              //   align="center"
               primary={`Warnings:`}
               primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
               secondary={networkInfo.warnings}
               secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
             />
           </ListItem>
-
         </Paper>
       </Grid>
 
       {/* 2nd card */}
-   {/*    <Grid item xs={12} md={10} lg={8}>
+      {/*    <Grid item xs={12} md={10} lg={8}>
         <Paper className={fixedMediumHeightPaper}>
           <Title>Latest block</Title>
           <Divider />

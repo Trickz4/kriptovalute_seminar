@@ -11,78 +11,11 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import clsx from "clsx";
 
-
-
-
 import Title from "../mUI/Title";
 import MempoolSingleTxInfo from "./MempoolSingleTxInfo";
 
 // Fetch data from blockchain
 let mempoolTxsArray = [];
-
-/* // use as an example
-const showMempoolTxsHandler = (event) => {
-  event.preventDefault();
-  console.log("pressing button works!");
-  fetch("/currentPrice")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      mempoolTxsArray = data;
-    });
-}; */
-
-// mock data for table
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -116,7 +49,7 @@ export default function MempoolTxs(props) {
     fetch("/getRawMempool")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setMempoolTxsArray(data);
       });
   }, []); // empty array to stop infinitive loop -> it is a dependency
@@ -142,18 +75,6 @@ export default function MempoolTxs(props) {
     </div>
   );
 
-  // ------------------
-  // const [mempoolSingleTxId, setMempoolSingleTxId] =
-  //   React.useState("tx not defined");
-
-  //   const onFetchMempoolSingleTxHandler = (transactionId) => {
-  //     setMempoolSingleTxId(transactionId);
-  //     console.log("inside dashboard.js: ", transactionId);
-  //     console.log(mempoolSingleTxId);
-  //   };
-
-  // -----------------
-
   return (
     <Grid container spacing={3} justify="center">
       {/* Recent something */}
@@ -167,18 +88,7 @@ export default function MempoolTxs(props) {
         <Paper className={fixedMediumHeightPaper}>
           <Title>Mempool transactions</Title>
           <Divider />
-          {/* TODO: change font of transactions inside table */}
           <Table size="small" stickyHeader>
-            {/* <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead> */}
-
             <TableBody>
               {mempoolTxsArray.map((transaction, i) => (
                 <TableRow
@@ -189,10 +99,6 @@ export default function MempoolTxs(props) {
                   hover
                 >
                   <TableCell align="center">{transaction}</TableCell>
-                  {/* <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

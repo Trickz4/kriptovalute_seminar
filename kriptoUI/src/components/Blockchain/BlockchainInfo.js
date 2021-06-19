@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -12,14 +11,7 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import clsx from "clsx";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import CardMedia from "@material-ui/core/CardMedia";
 
-import Title from "../mUI/Title";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -71,7 +63,6 @@ export default function BlockchainInfo(props) {
   const [blockchainInfo, setBlockchainInfo] = useState("");
   const classes = useStyles();
 
-  let placeholderArray = [];
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const fixedMediumHeightPaper = clsx(classes.paper, classes.fixedMediumHeight);
 
@@ -80,7 +71,7 @@ export default function BlockchainInfo(props) {
     fetch("/getBlockchainInfo")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setBlockchainInfo(data);
       });
   }, []); // empty array to stop infinitive loop -> it is a dependency

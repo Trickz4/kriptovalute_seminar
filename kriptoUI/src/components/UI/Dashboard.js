@@ -45,9 +45,8 @@ function Copyright() {
       {"Copyright © "}
       <Link color="inherit" href="http://localhost:3000/">
         Kriptovalute
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -230,7 +229,7 @@ export default function Dashboard() {
           >
             Bitcoin statistics
           </Typography>
-       {/*    <IconButton color="inherit">
+          {/*    <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
@@ -283,7 +282,7 @@ export default function Dashboard() {
               <ListItemText primary="Network Info" />
             </ListItem>
 
-           {/*  <ListItem button>
+            {/*  <ListItem button>
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
@@ -313,7 +312,7 @@ export default function Dashboard() {
             </ListItem>
 
             {/* Placeholder */}
-      {/*       <ListItem button>
+            {/*       <ListItem button>
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>

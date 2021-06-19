@@ -12,14 +12,6 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import clsx from "clsx";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import CardMedia from "@material-ui/core/CardMedia";
-
-import Title from "../mUI/Title";
 
 const useStyles = makeStyles((theme) => ({
   depositContext: {
@@ -49,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   marketPrice: {
     marginTop: "15px",
     // marginBottom: "50px",
-    color:"green",
+    color: "green",
   },
 }));
 
@@ -72,7 +64,6 @@ export default function BitcoinValue(props) {
   const [blockchainStats, setBlockchainStats] = useState("");
   const classes = useStyles();
 
-  let placeholderArray = [];
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const fixedMediumHeightPaper = clsx(classes.paper, classes.fixedMediumHeight);
 
@@ -94,7 +85,6 @@ export default function BitcoinValue(props) {
 
   return (
     <Grid container spacing={3} justify="center">
-
       {/* 1st card */}
       <Grid item xs={12} md={10} lg={10}>
         <Paper className={classes.paper}>
@@ -166,7 +156,7 @@ export default function BitcoinValue(props) {
       </Grid>
 
       {/* 2nd card */}
-   {/*    <Grid item xs={12} md={10} lg={8}>
+      {/*    <Grid item xs={12} md={10} lg={8}>
         <Paper className={fixedMediumHeightPaper}>
           <Title>Mempool transactions</Title>
           <Divider />

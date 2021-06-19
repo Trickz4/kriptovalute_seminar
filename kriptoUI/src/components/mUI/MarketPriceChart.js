@@ -11,37 +11,19 @@ import {
 } from "recharts";
 import Title from "./Title";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data1 = [
-  { time: "00:00", amount: 0 },
-  { time: "00:30", amount: 300 },
-  { time: "00:60", amount: 600 },
-  // createData("03:00", 300),
-  // createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00", undefined),
-];
-
 export default function MarketPriceChart() {
   const theme = useTheme();
   const [chartData, setChartData] = useState("");
-  let parsedData;
+ 
   useEffect(() => {
+    let parsedData;
     // Update component upon mounting
     console.log("status updated!");
 
     fetch("/marketPriceChartData")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.status === "ok") {
           console.log(data.values);
 
@@ -49,7 +31,7 @@ export default function MarketPriceChart() {
             x: new Date(value.x * 1000).toLocaleDateString("en-GB"),
             y: value.y,
           }));
-          console.log(parsedData);
+          // console.log(parsedData);
           setChartData(parsedData);
         } else alert("Error in fetching chart data!");
       });

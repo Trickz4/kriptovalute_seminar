@@ -14,15 +14,16 @@ import Title from "./Title";
 export default function TransactionsChart() {
   const theme = useTheme();
   const [chartData, setChartData] = useState("");
-  let parsedData;
+
   useEffect(() => {
+    let parsedData;
     // Update component upon mounting
     console.log("status updated!");
 
     fetch("/transactionsChartData")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.status === "ok") {
           console.log(data.values);
 

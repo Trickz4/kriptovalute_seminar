@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -36,17 +32,15 @@ export default function MempoolSingleTxInfo(props) {
   const [txInfoJSX, setTxInfoJSX] = useState("");
   const classes = useStyles();
 
-  let txInfo = [];
   useEffect(() => {
     // Update component upon mounting
-    // fetch array of transactions currently in mempool
 
     // Rpc Warning: parameter 1 must be of length 64
     if (props.mempoolSingleTransactionId.length === 64) {
       fetch(`/getRawTransaction/?id=${props.mempoolSingleTransactionId}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           setTxInfoJSX(
             <React.Fragment>
               <ListItem>
@@ -76,14 +70,14 @@ export default function MempoolSingleTxInfo(props) {
                 />
               </ListItem>
 
-              <ListItem>
+{/*               <ListItem>
                 <ListItemText
                   primary={`Confirmations:`}
                   primaryTypographyProps={{ style: ListItemTextPrimaryCSS }}
                   secondary={data.confirmations}
                   secondaryTypographyProps={{ style: ListItemTextSecondaryCSS }}
                 />
-              </ListItem>
+              </ListItem> */}
 
               <ListItem>
                 <ListItemText
