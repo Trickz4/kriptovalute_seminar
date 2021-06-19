@@ -25,7 +25,7 @@ export default function MarketPriceChart() {
       .then((data) => {
         // console.log(data);
         if (data.status === "ok") {
-          console.log(data.values);
+          // console.log(data.values);
 
           parsedData = data.values.map((value) => ({
             x: new Date(value.x * 1000).toLocaleDateString("en-GB"),

@@ -25,13 +25,13 @@ export default function TransactionsChart() {
       .then((data) => {
         // console.log(data);
         if (data.status === "ok") {
-          console.log(data.values);
+          // console.log(data.values);
 
           parsedData = data.values.map((value) => ({
             x: new Date(value.x * 1000).toLocaleDateString("en-GB"),
             y: value.y,
           }));
-          console.log(parsedData);
+          // console.log(parsedData);
           setChartData(parsedData);
         } else alert("Error in fetching chart data!");
       });
